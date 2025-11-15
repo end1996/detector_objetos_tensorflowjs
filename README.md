@@ -1,53 +1,100 @@
-# React + TypeScript + Vite
+# Detector de Objetos con TensorFlow.js
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web que permite detectar objetos en tiempo real utilizando la cámara del dispositivo, implementada con React, TypeScript y TensorFlow.js.
 
-Currently, two official plugins are available:
+## 🚀 Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Detección de objetos en tiempo real utilizando el modelo COCO-SSD
+- Interfaz de usuario intuitiva que muestra las detecciones directamente sobre el video
+- Visualización de etiquetas y puntuaciones de confianza
+- Soporte para WebGL para aceleración por hardware
 
-## React Compiler
+## 🛠️ Tecnologías utilizadas
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **Frontend**:
+  - React 19
+  - TypeScript
+  - Vite (como bundler y servidor de desarrollo)
+  - TensorFlow.js
+  - Modelo COCO-SSD para detección de objetos
 
-## Expanding the ESLint configuration
+## 📦 Instalación
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clona el repositorio:
+   ```bash
+   git clone [URL_DEL_REPOSITORIO]
+   cd detector-objetos
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🚦 Uso
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Inicia el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+
+2. Abre tu navegador y navega a `http://localhost:5173`
+
+3. Acepta los permisos de la cámara cuando se te solicite
+
+4. La aplicación comenzará a detectar objetos en tiempo real
+
+## 🏗️ Estructura del proyecto
+
+```
+src/
+├── components/
+│   └── ObjectDetection.tsx  # Componente principal de detección de objetos
+├── App.tsx                  # Componente raíz de la aplicación
+├── main.tsx                 # Punto de entrada de la aplicación
+└── App.css                  # Estilos globales
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📊 Modelo utilizado
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
+La aplicación utiliza el modelo pre-entrenado **COCO-SSD** (Common Objects in Context - Single Shot MultiBox Detection) que puede detectar hasta 80 clases diferentes de objetos cotidianos.
+
+## 🧠 Cómo funciona
+
+1. La aplicación accede a la cámara del dispositivo usando la API de WebRTC
+2. Los frames del video se pasan al modelo COCO-SSD para la detección de objetos
+3. El modelo devuelve las coordenadas de los objetos detectados junto con sus etiquetas y puntuaciones de confianza
+4. Se dibujan cuadros delimitadores y etiquetas sobre el video en tiempo real
+
+## ⚙️ Configuración avanzada
+
+### Variables de entorno
+
+No se requieren variables de entorno para la configuración básica.
+
+### Construcción para producción
+
+Para crear una versión optimizada para producción:
+
+```bash
+npm run build
+```
+
+Esto generará archivos optimizados en la carpeta `dist/` que pueden ser desplegados en cualquier servidor web estático.
+
+## 📝 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+
+## 🤝 Contribución
+
+Las contribuciones son bienvenidas. Por favor, abre un issue primero para discutir los cambios que te gustaría hacer.
+
+## 📧 Contacto
+
+[Enmanuel Nava] - [end1996@gmail.com]
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 import reactDom from 'eslint-plugin-react-dom'
 
 export default defineConfig([
